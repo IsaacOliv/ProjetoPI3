@@ -16,17 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/login', [UsersController::class, 'login'])->name('users.login');
-Route::get('/register',[UsersController::class, 'register'])->name('users.register');
-Route::post('/register',[UsersController::class, 'store'])->name('users.store');
+
 
 Route::controller(UsersController::class)->group(function (){
-    Route::get('/', 'index')->name('users.index');
+    Route::get('/login', 'login')->name('users.login');
+    Route::get('/register', 'register')->name('users.register');
+    Route::post('/register','store')->name('users.store');
 
 });
+
 Route::controller(PostsController::class)->prefix('post')->group(function (){
+    Route::get('/', 'index')->name('posts.index');
     Route::get('/create', 'create')->name('posts.create');
     Route::post('/create', 'store')->name('posts.store');
+    Route::get('/edit/{id}','edit')->name('posts.edit');
+    Route::PUT('/edit/{id}','update')->name('posts.update');
+    Route::delete('/destroy/{id}', 'delete')->name('posts.delete');
 });
 
 
