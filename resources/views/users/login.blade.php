@@ -17,9 +17,10 @@ a.a1{
 </style>
 
         <div class="header header1">Login</div>
-        <form action="home.html" name="loginForm" method="get">
+        <form name="loginForm" method="post" action="{{route('authenticade')}}">
+            @csrf
             <input class="email" name="email" type="text" placeholder="Email" >
-            <input class="senha" name="senha" type="password" placeholder="Senha">
+            <input class="senha" name="password" type="password" placeholder="Senha">
             <input type="submit" value="Confirmar">
         </form>
 

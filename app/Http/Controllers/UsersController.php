@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -12,9 +14,28 @@ class UsersController extends Controller
     {
         return view('users.login');
     }
-    public function check()
+    public function authenticade(Request $request)
     {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+        if (Auth::attempt($credentials)) {
+            $request->session();
+            return redirect()->route('posts.index');
+        }
 
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
     public function register()
     {
@@ -22,10 +43,13 @@ class UsersController extends Controller
     }
     public function store(Request $request)
     {
-        $user = $request->all();
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
         if ($user) {
-            User::create($user);
-            return redirect()->route('users.login')->with('Sucesso', 'Cadastrado com sucesso');
+            return redirect()->route('login')->with('Sucesso', 'Cadastrado com sucesso');
         }
     }
 

@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Posts;
 use Illuminate\Http\Request;
-
-use function GuzzleHttp\Promise\all;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Posts::all();
+        if (Auth::check()){
+            $id_user = Auth::user()->id;
+            $posts = Posts::where('id_user', $id_user)->get();
 
-        return view('posts.index', compact('posts'));
+            return view('posts.index', compact('posts'));
+        }
     }
 
     public function create()
@@ -23,10 +25,17 @@ class PostsController extends Controller
     }
     public function store(Request $request)
     {
-        $post = $request->all();
+        $user = auth()->user();
+        $post = Posts::create([
+            'title' => $request->title,
+            'coment' => $request->coment,
+            'moneyPlus' => $request->moneyPlus,
+            'moneyLess' => $request->moneyLess,
+            'id_user' => $user->id
+        ]);
         if ($post) {
-           Posts::create($post);
-            return redirect()->route('users.index')->with('sucesso', 'Post criado com sucesso');
+
+            return redirect()->route('posts.index')->with('sucesso', 'Post criado com sucesso');
         }
         return redirect()->back()->with('falha', 'Erro ao criar post');
 

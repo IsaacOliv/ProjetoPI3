@@ -12,7 +12,7 @@
 <div class="center">
     <div class="botoes">
         <a class="a1"href="{{route('users.register')}}">Cadastrar</a>
-        <a class="a2"href="{{route('users.login')}}">Entrar</a>
+        <a class="a2"href="{{route('login')}}">Entrar</a>
     </div>
     @yield('conteudo')
 </div>

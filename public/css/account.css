@@ -54,6 +54,16 @@ form input[type="submit"]{
     background: #2981bd;
     border: 1px solid #2573a7;
 }
+form a[class="butao"]{
+    margin: 30px 0px 40px 35px;
+    width: 465px;
+    height: 50px;
+    font-size: 23px;
+    cursor: pointer;
+    color: #ffffff;
+    background: #2981bd;
+    border: 1px solid #2573a7;
+}
 form input[type="submit"]:hover{
     background: #2990d1;
     transition: .2s;

@@ -12,7 +12,13 @@
     input[type=cadastro]{
         background-color: gray;
         border-color: black;
-}
+    }
+    .sair{
+        position: relative;
+        left: 280%;
+        top: 1px
+
+    }
     </style>
     <title>Document</title>
 </head>
@@ -22,7 +28,7 @@
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="{{route('users.login')}}">Login</a>
+              <a class="navbar-brand" href="{{route('posts.index')}}">Inicio</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -34,9 +40,16 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('posts.create')}}">Novo post</a>
                   </li>
+
+                    <li class="sair">
+                        <form action="{{route('logout')}}" method="get">
+
+                            <button class="btn btn-danger" >sair</button>
+                        </form>
+                    </li>
+
                 </ul>
               </div>
-
               <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
