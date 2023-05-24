@@ -30,6 +30,7 @@ Route::controller(UsersController::class)->group(function (){
 
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
+
     Route::controller(PostsController::class)->prefix('post')->group(function (){
         Route::get('/', 'index')->name('posts.index');
         Route::get('/create', 'create')->name('posts.create');

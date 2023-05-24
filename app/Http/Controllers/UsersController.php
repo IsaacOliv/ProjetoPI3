@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+    public function register()
+    {
+        return view('users.register');
+    }
+    public function store(Request $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        if ($user) {
+            return redirect()->route('login')->with('Sucesso', 'Cadastrado com sucesso');
+        }
+    }
 
     public function login()
     {
@@ -36,21 +51,6 @@ class UsersController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
-    }
-    public function register()
-    {
-        return view('users.register');
-    }
-    public function store(Request $request)
-    {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-        if ($user) {
-            return redirect()->route('login')->with('Sucesso', 'Cadastrado com sucesso');
-        }
     }
 
 }

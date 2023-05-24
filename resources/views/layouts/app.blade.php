@@ -6,19 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <style>
-    body {
-    background-color: gray;
-    }
+
     input[type=cadastro]{
         background-color: gray;
         border-color: black;
     }
     .sair{
         position: relative;
-        left: 280%;
-        top: 1px
+        left: 100%;
+        top: 1px;
 
     }
+    body{
+    background: linear-gradient(#bedef4, #93c8ec);
+    height: 100vh;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+}
     </style>
     <title>Document</title>
 </head>
@@ -26,7 +29,7 @@
 
     <div class="container">
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark" >
             <div class="container-fluid">
               <a class="navbar-brand" href="{{route('posts.index')}}">Inicio</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,20 +43,11 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('posts.create')}}">Novo post</a>
                   </li>
-
-                    <li class="sair">
-                        <form action="{{route('logout')}}" method="get">
-
-                            <button class="btn btn-danger" >sair</button>
+                        <form action="{{route('logout')}}" method="get" class="d-flex">
+                            <button class="btn btn-outline-danger mt-2 position-absolute top-0 end-0"  >sair</button>
                         </form>
-                    </li>
-
                 </ul>
               </div>
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
 
             </div>
           </nav>

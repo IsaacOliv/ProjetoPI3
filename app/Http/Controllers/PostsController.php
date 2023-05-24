@@ -13,9 +13,14 @@ class PostsController extends Controller
     {
         if (Auth::check()){
             $id_user = Auth::user()->id;
-            $posts = Posts::where('id_user', $id_user)->get();
 
-            return view('posts.index', compact('posts'));
+            $somaReceita = Posts::where('id_user', $id_user)->sum('moneyPlus');
+            $somaDespesa = Posts::where('id_user', $id_user)->sum('moneyLess');
+
+            $posts = Posts::where('id_user', $id_user)->paginate(1);
+
+            return view('posts.index', compact('posts', 'somaReceita', 'somaDespesa'));
+
         }
     }
 
